@@ -5,19 +5,21 @@ import { TestBench, TestClassResult } from "testbench_v1";
 import { TestBenchView } from "./testBenchView/testBenchView.js";
 import { TestEntry } from "./testBenchView/testEntry/testEntry.js";
 import { LineEntry } from "./testBenchView/lineEntry/lineEntry.js";
+import { TestBenchTestTrigger } from "./testBenchView/testBenchTestTrigger.js"
+import { DiObjectProvider } from "./testBenchView/diObjectProvider.js";
 
 export class TestBenchUi {
 
     constructor() {
 
-        /** @type {TestBench} */
-        this.testBench = new TestBench(new ObjectFunction(this, this.log), new ObjectFunction(this, this.result));
+        /** @type {TestBenchTestTrigger} */
+        this.testTrigger = new TestBenchTestTrigger();
 
 		/** @type {ComponentFactory} */
         this.componentFactory = InjectionPoint.instance(ComponentFactory);
 
         /** @type {TestBenchView} */
-        this.testBenchView = InjectionPoint.instance(TestBenchView, [this.testBench]);
+        this.testBenchView = InjectionPoint.instance(TestBenchView, [this.testTrigger]);
 
         /** @type {Provider} */
         this.testEntryProvider = InjectionPoint.provider(TestEntry);
@@ -25,6 +27,19 @@ export class TestBenchUi {
         /** @type {Provider} */
         this.lineEntryProvider = InjectionPoint.provider(LineEntry);
 
+        /** @type {TestBench} */
+        this.testBench = null;
+
+    }
+
+    postConfig() {
+        /** @type {TestBench} */
+        this.testBench = new TestBench(
+            new ObjectFunction(this, this.log),
+            new ObjectFunction(this, this.result),
+            new DiObjectProvider());
+
+        this.testTrigger.testBench = this.testBench;
     }
 
     addTest(testClass) {
