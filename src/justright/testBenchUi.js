@@ -9,12 +9,15 @@ import { LineEntry } from "./testBenchView/lineEntry/lineEntry.js";
 export class TestBenchUi {
 
     constructor() {
-        
+
+        /** @type {TestBench} */
+        this.testBench = new TestBench(new ObjectFunction(this, this.log));
+
 		/** @type {ComponentFactory} */
         this.componentFactory = InjectionPoint.instance(ComponentFactory);
 
         /** @type {TestBenchView} */
-        this.testBenchView = InjectionPoint.instance(TestBenchView);
+        this.testBenchView = InjectionPoint.instance(TestBenchView, [this.testBench]);
 
         /** @type {Provider} */
         this.testEntryProvider = InjectionPoint.provider(TestEntry);
@@ -22,8 +25,6 @@ export class TestBenchUi {
         /** @type {Provider} */
         this.lineEntryProvider = InjectionPoint.provider(LineEntry);
 
-        /** @type {TestBench} */
-        this.testBench = new TestBench(new ObjectFunction(this, this.log));
     }
 
     addTest(testClass) {
@@ -34,11 +35,7 @@ export class TestBenchUi {
     }
 
     run() {
-        try {
-            this.testBench.run();
-        } catch (exception) {
-
-        }
+        this.testBench.run();
     }
 
     log(line, level) {
