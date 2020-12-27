@@ -10,20 +10,26 @@ export class LineEntry {
     /**
      * 
      * @param {String} line 
+     * @param {String} color 
      */
-	constructor(line) {
+	constructor(line, color = null) {
 
 		/** @type {ComponentFactory} */
         this.componentFactory = InjectionPoint.instance(ComponentFactory);
 
         /** @type {String} */
         this.line = line;
+
+        this.color = color;
     }
 
 	postConfig() {
 		this.component = this.componentFactory.create(LineEntry.COMPONENT_NAME);
         CanvasStyles.enableStyle(LineEntry.COMPONENT_NAME);
         this.component.setChild("lineEntry", this.line);
+        if (this.color) {
+            this.component.get("lineEntry").setAttributeValue("style","color:" + this.color);
+        }
     }
 
 }

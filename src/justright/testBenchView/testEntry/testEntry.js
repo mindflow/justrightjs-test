@@ -22,6 +22,7 @@ export class TestEntry {
 		/** @type {EventRegistry} */
 		this.eventRegistry = InjectionPoint.instance(EventRegistry);
 
+        /** @type {String} */
         this.className = className;
 
         /** @type {TestTrigger} */
@@ -39,5 +40,17 @@ export class TestEntry {
 
     runClicked() {
         this.testTrigger.runSingle(this.className);
+    }
+
+    fail() {
+        this.component.get("testName").setAttributeValue("style", "font-weight:bold;color:red");
+    }
+
+    succeed() {
+        this.component.get("testName").setAttributeValue("style", "font-weight:bold;color:green");
+    }
+
+    reset() {
+        this.component.get("testName").removeAttribute("style");
     }
 }
