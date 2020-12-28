@@ -47,6 +47,7 @@ export class TestBenchUi {
             this.testBench.addTest(testClass);
             this.testBenchView.addTestEntry(this.testEntryProvider.get([testClass.name, this.testBench]));
         }
+        return this;
     }
 
     run() {
