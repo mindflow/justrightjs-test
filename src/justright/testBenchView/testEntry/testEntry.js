@@ -50,6 +50,10 @@ export class TestEntry {
         this.component.get("testName").setAttributeValue("style", "font-weight:bold;color:green");
     }
 
+    running() {
+        this.component.get("testName").setAttributeValue("style", "font-weight:bold;color:black");
+    }
+
     reset() {
         this.component.get("testName").removeAttribute("style");
     }

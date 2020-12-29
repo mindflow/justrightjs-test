@@ -1,7 +1,7 @@
 import { Map, ObjectFunction } from "coreutil_v1";
 import { CanvasStyles, ComponentFactory, EventRegistry } from "justright_core_v1";
 import { InjectionPoint } from "mindi_v1";
-import { TestClassResult, TestTrigger } from "testbench_v1";
+import { TestClassState, TestTrigger } from "testbench_v1";
 import { LineEntry } from "./lineEntry/lineEntry.js";
 import { TestEntry } from "./testEntry/testEntry.js"
 
@@ -79,16 +79,20 @@ export class TestBenchView {
 
     /**
      * 
-     * @param {TestClassResult} testClassResult 
+     * @param {TestClassState} testClassState 
      */
-    result(testClassResult) {
-        if (this.testEntryMap.contains(testClassResult.className)) {
-            const testEntry = this.testEntryMap.get(testClassResult.className);
-            if (TestClassResult.SUCCESS === testClassResult.result) {
+    result(testClassState) {
+        if (this.testEntryMap.contains(testClassState.className)) {
+            /** @type {TestEntry} */
+            const testEntry = this.testEntryMap.get(testClassState.className);
+            if (TestClassState.SUCCESS === testClassState.state) {
                 testEntry.succeed();
             }
-            if (TestClassResult.FAIL === testClassResult.result) {
+            if (TestClassState.FAIL === testClassState.state) {
                 testEntry.fail();
+            }
+            if (TestClassState.RUNNING === testClassState.state) {
+                testEntry.running();
             }
         }
     }
