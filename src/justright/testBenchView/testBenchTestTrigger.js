@@ -18,15 +18,15 @@ export class TestBenchTestTrigger extends TestTrigger {
      * Run test by class name
      * @param {string} className 
      */
-    runSingle(className) {
-        this.theTestBench.runSingle(className);
+    runClass(className) {
+        this.theTestBench.runClass(className);
     }
 
     /**
      * Run all test classes
      */
-    run() {
-        this.theTestBench.run();
+    runAll() {
+        this.theTestBench.runAll();
     }
 
 }

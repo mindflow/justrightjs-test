@@ -39,7 +39,7 @@ export class TestEntry {
     }
 
     runClicked() {
-        this.testTrigger.runSingle(this.className);
+        this.testTrigger.runClass(this.className);
     }
 
     fail() {

@@ -53,7 +53,7 @@ export class TestBenchView {
     }
 
     runAllClicked() {
-        this.testTrigger.run();
+        this.testTrigger.runAll();
     }
 
     clearClicked() {
