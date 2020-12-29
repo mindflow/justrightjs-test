@@ -16,6 +16,15 @@ export class TestBenchTestTrigger extends TestTrigger {
 
     /**
      * Run test by class name
+     * @param {String} className 
+     * @param {String} functionName
+     */
+    runFunction(className, functionName) {
+        this.theTestBench.runFunction(className, functionName);
+    }
+
+    /**
+     * Run test by class name
      * @param {string} className 
      */
     runClass(className) {

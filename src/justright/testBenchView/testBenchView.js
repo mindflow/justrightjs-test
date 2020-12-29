@@ -48,7 +48,7 @@ export class TestBenchView {
      * @param {TestEntry} testEntry 
      */
     addTestEntry(testEntry) {
-        this.testEntryMap.set(testEntry.className, testEntry);
+        this.testEntryMap.set(testEntry.testClass.name, testEntry);
         this.component.addChild("testList", testEntry.component);
     }
 
@@ -85,15 +85,7 @@ export class TestBenchView {
         if (this.testEntryMap.contains(testClassState.className)) {
             /** @type {TestEntry} */
             const testEntry = this.testEntryMap.get(testClassState.className);
-            if (TestClassState.SUCCESS === testClassState.state) {
-                testEntry.succeed();
-            }
-            if (TestClassState.FAIL === testClassState.state) {
-                testEntry.fail();
-            }
-            if (TestClassState.RUNNING === testClassState.state) {
-                testEntry.running();
-            }
+            testEntry.result(testClassState);
         }
     }
 }

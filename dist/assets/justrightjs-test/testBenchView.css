@@ -6,7 +6,6 @@
     padding: 0.5em;
     height: 100vh;
     width: 100vw;
-
 }
 
 .testBenchGridContainer > div {
@@ -14,11 +13,35 @@
     padding: 0.5em 0.5em;
   }
 
+
+
+
 .testBenchMenuCell {
-    grid-row-start: 1;
-    grid-row-end: 2;
     font-size: 14pt;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
+
+.testBenchTestMenu {
+    margin-bottom: 0.5em;
+}
+
+.testBenchMenuContent {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12pt;
+    position: absolute;
+    top: 4em; 
+    bottom: 0;
+    left: 0.5em;
+    right: 0;
+    overflow: scroll;
+}
+
+
+
+
 
 .testBenchResultCell {
     margin: 0;
@@ -33,16 +56,12 @@
     left: 0.5em; 
 }
 
-.testBenchTestMenu {
-    margin-bottom: 0.5em;
-}
-
 .testBenchResultContent {
     font-family: 'Courier New', Courier, monospace;
     white-space: pre;
     font-size: 12pt;
     position: absolute;
-    top: 2.5em; 
+    top: 4em; 
     bottom: 0;
     left: 0.5em;
     right: 0;
