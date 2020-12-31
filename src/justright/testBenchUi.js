@@ -30,6 +30,8 @@ export class TestBenchUi {
         /** @type {TestBench} */
         this.testBench = null;
 
+        this.testEntryLoadedPromiseArray = [];
+
     }
 
     postConfig() {
@@ -43,15 +45,22 @@ export class TestBenchUi {
     }
 
     addTest(testClass) {
+        const context = this;
         if(!this.testBench.contains(testClass)) {
             this.testBench.addTest(testClass);
-            this.testBenchView.addTestEntry(this.testEntryProvider.get([testClass, this.testBench]));
+            const testEntryLoadedPromise = this.testEntryProvider.get([testClass, this.testBench]).then((testEntry) => {
+                context.testBenchView.addTestEntry(testEntry);
+            });
+            this.testEntryLoadedPromiseArray.push(testEntryLoadedPromise);
         }
         return this;
     }
 
     run() {
-        this.testBench.run();
+        const context = this;
+        Promise.all(this.testEntryLoadedPromiseArray).then(() => {
+            context.testBench.run();
+        });
     }
 
     /**
@@ -64,7 +73,10 @@ export class TestBenchUi {
 
     log(line, level) {
         const color = this.asColor(level);
-        this.testBenchView.addLine(this.lineEntryProvider.get([line, color]));
+        const context = this;
+        this.lineEntryProvider.get([line, color]).then((lineEntry) => {
+            context.testBenchView.addLine(lineEntry);
+        });
     }
     
     asColor(level) {

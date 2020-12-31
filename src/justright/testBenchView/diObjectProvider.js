@@ -16,9 +16,10 @@ export class DiObjectProvider extends ObjectProvider {
                 config.addAllTypeConfig(object.typeConfigList);
             }
             config.finalize().then(() => {
-                MindiInjector.getInstance().injectTarget(object, config);
+                MindiInjector.getInstance().injectTarget(object, config).then(() => {
+                    resolve(object);
+                });
             });
-            resolve(object);
         });
     }
 

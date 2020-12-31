@@ -49,9 +49,10 @@ export class TestEntry {
         /** @type {List} */
         const testFunctions = this.testClass.testFunctions();
         testFunctions.forEach((testFunction, parent) => {
-            const testEntryFunction = this.testEntryFunctionProvider.get([this.testClass, testFunction, this.testTrigger]);
-            this.testEntryFunctionList.add(testEntryFunction);
-            this.component.get("testEntryFunctions").addChild(testEntryFunction.component);
+            this.testEntryFunctionProvider.get([this.testClass, testFunction, this.testTrigger]).then((testEntryFunction) => {
+                this.testEntryFunctionList.add(testEntryFunction);
+                this.component.get("testEntryFunctions").addChild(testEntryFunction.component);
+            });
             return true;
         },this);
     }
