@@ -1,5 +1,5 @@
 import multi from '@rollup/plugin-multi-entry';
-import webes from 'plugin-webes';
+import webes from 'rollup-plugin-webes';
 import { terser } from "rollup-plugin-terser";
 import copy from 'rollup-plugin-copy';
 
