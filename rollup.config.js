@@ -1,11 +1,11 @@
-import multiEntry from 'rollup-plugin-multi-entry';
-import postprocess from 'rollup-plugin-postprocess';
+import multi from '@rollup/plugin-multi-entry';
+import replace from '@rollup/plugin-replace';
+import { terser } from "rollup-plugin-terser";
 import copy from 'rollup-plugin-copy';
-import uglify from "rollup-plugin-uglify-es";
 
 export default [{
     input: "src/**/*.js",
-    external: [ 'coreutil_v1' ],
+    external: [ 'coreutil_v1', 'justright_core_v1', 'mindi_v1', 'testbench_v1' ],
     output: {
         name: 'justright_test_v1',
         file: "dist/jsm/justright_test_v1.js",
@@ -13,10 +13,19 @@ export default [{
         format: "es"
     },
     plugins: [
-        multiEntry(),
-        postprocess([
-            [/(?<=import\s*(.*)\s*from\s*)['"]((?!.*[.]js).*)['"];/, '\'./$2.js\'']
-        ])
+        multi(),
+        replace({
+            'coreutil_v1': 'coreutilv1',
+            'testbench_v1': 'testbenchv1',
+            'mindi_v1': 'mindiv1',
+            'justright_core_v1': 'justrightcorev1',
+
+            'coreutilv1': './coreutil_v1.js',
+            'testbenchv1': './testbench_v1.js',
+            'mindiv1': './mindi_v1.js',
+            'containerbridgev1': './containerbridge_v1.js',
+            'justrightcorev1' : './justright_core_v1.js'
+        })
     ]
 },{
     input: "src/**/*.js",
@@ -27,11 +36,20 @@ export default [{
         format: "es"
     },
     plugins: [
-        multiEntry(),
-        postprocess([
-            [/(?<=import\s*(.*)\s*from\s*)['"]((?!.*[.]js).*)['"];/, '\'./$2.js\'']
-        ]),
-        uglify()
+        multi(),
+        replace({
+            'coreutil_v1': 'coreutilv1',
+            'testbench_v1': 'testbenchv1',
+            'mindi_v1': 'mindiv1',
+            'justright_core_v1': 'justrightcorev1',
+
+            'coreutilv1': './coreutil_v1.js',
+            'testbenchv1': './testbench_v1.js',
+            'mindiv1': './mindi_v1.js',
+            'containerbridgev1': './containerbridge_v1.js',
+            'justrightcorev1' : './justright_core_v1.js'
+        }),
+        terser()
     ]
 },{
     input: "src/**/*.js",
@@ -43,14 +61,13 @@ export default [{
         format: "cjs"
     },
     plugins: [
-        multiEntry(),
+        multi(),
         copy({
             targets: [
               { src: 'src/**/*.css', dest: 'dist/assets/justrightjs-test' },
               { src: 'src/**/*.html', dest: 'dist/assets/justrightjs-test' }
             ],
             verbose: true
-        }),
-        //uglify()
+        })
     ]
 }]
