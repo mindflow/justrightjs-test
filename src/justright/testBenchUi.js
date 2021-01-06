@@ -56,13 +56,6 @@ export class TestBenchUi {
         return this;
     }
 
-    run() {
-        const context = this;
-        Promise.all(this.testEntryLoadedPromiseArray).then(() => {
-            context.testBench.run();
-        });
-    }
-
     /**
      * 
      * @param {TestClassResult} testClassResult 

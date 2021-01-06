@@ -74,7 +74,7 @@ export class TestBenchView {
             const testEntry = value;
             testEntry.reset();
             return true;
-        });
+        },this);
     }
 
     /**
