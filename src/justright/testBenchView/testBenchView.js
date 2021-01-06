@@ -25,7 +25,7 @@ export class TestBenchView {
         /** @type {TestTrigger} */
         this.testTrigger = testTrigger;
 
-        /** @type {Map} */
+        /** @type {Map<TestEntry>} */
         this.testEntryMap = new Map();
     }
 
