@@ -23,7 +23,7 @@ export class TestEntry {
 		/** @type {EventRegistry} */
         this.eventRegistry = InjectionPoint.instance(EventRegistry);
         
-        /** @type {Provider} */
+        /** @type {Provider<TestEntryFunction>} */
         this.testEntryFunctionProvider = InjectionPoint.provider(TestEntryFunction)
 
         /** @type {Object} */
@@ -32,7 +32,7 @@ export class TestEntry {
         /** @type {TestTrigger} */
         this.testTrigger = testTrigger;
 
-        /** @type {List} */
+        /** @type {List<TestEntryFunction>} */
         this.testEntryFunctionList = new List();
 
         this.failed = false;
@@ -46,7 +46,7 @@ export class TestEntry {
         this.eventRegistry.attach(this.component.get("runButton"), "onclick", "//event:runClicked", this.component.componentIndex);
         this.eventRegistry.listen("//event:runClicked", new ObjectFunction(this, this.runClicked), this.component.componentIndex);
 
-        /** @type {List} */
+        /** @type {List<TestEntryFunction>} */
         const testFunctions = this.testClass.testFunctions();
         testFunctions.forEach((testFunction, parent) => {
             this.testEntryFunctionProvider.get([this.testClass, testFunction, this.testTrigger]).then((testEntryFunction) => {
