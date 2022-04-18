@@ -76,7 +76,7 @@ class TestEntryFunction {
         this.component.setChild("testEntryFunctionName", this.testFunction.name);
 
         this.eventRegistry.attach(this.component.get("runButton"), "onclick", "//event:runClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:runClicked", new coreutil_v1.ObjectFunction(this, this.runClicked), this.component.componentIndex);
+        this.eventRegistry.listen("//event:runClicked", new coreutil_v1.Method(this, this.runClicked), this.component.componentIndex);
     }
 
     runClicked() {
@@ -152,7 +152,7 @@ class TestEntry {
         this.component.setChild("testEntryName", this.testClass.name);
 
         this.eventRegistry.attach(this.component.get("runButton"), "onclick", "//event:runClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:runClicked", new coreutil_v1.ObjectFunction(this, this.runClicked), this.component.componentIndex);
+        this.eventRegistry.listen("//event:runClicked", new coreutil_v1.Method(this, this.runClicked), this.component.componentIndex);
 
         /** @type {List<TestEntryFunction>} */
         const testFunctions = this.testClass.testFunctions();
@@ -244,13 +244,13 @@ class TestBenchView {
         justright_core_v1.CanvasStyles.enableStyle(TestBenchView.COMPONENT_NAME);
 
         this.eventRegistry.attach(this.component.get("clearButton"), "onclick", "//event:clearClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:clearClicked", new coreutil_v1.ObjectFunction(this, this.clearClicked), this.component.componentIndex);
+        this.eventRegistry.listen("//event:clearClicked", new coreutil_v1.Method(this, this.clearClicked), this.component.componentIndex);
 
         this.eventRegistry.attach(this.component.get("runAllButton"), "onclick", "//event:runAllClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:runAllClicked", new coreutil_v1.ObjectFunction(this, this.runAllClicked), this.component.componentIndex);
+        this.eventRegistry.listen("//event:runAllClicked", new coreutil_v1.Method(this, this.runAllClicked), this.component.componentIndex);
 
         this.eventRegistry.attach(this.component.get("resetButton"), "onclick", "//event:resetClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:resetClicked", new coreutil_v1.ObjectFunction(this, this.resetClicked), this.component.componentIndex);
+        this.eventRegistry.listen("//event:resetClicked", new coreutil_v1.Method(this, this.resetClicked), this.component.componentIndex);
     }
 
     /**
@@ -393,8 +393,8 @@ class TestBenchUi {
     postConfig() {
         /** @type {TestBench} */
         this.testBench = new testbench_v1.TestBench(
-            new coreutil_v1.ObjectFunction(this, this.log),
-            new coreutil_v1.ObjectFunction(this, this.result),
+            new coreutil_v1.Method(this, this.log),
+            new coreutil_v1.Method(this, this.result),
             new DiObjectProvider());
 
         this.testTrigger.testBench = this.testBench;

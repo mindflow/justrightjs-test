@@ -1,4 +1,4 @@
-import { List, ObjectFunction } from "coreutil_v1";
+import { List, Method } from "coreutil_v1";
 import { CanvasStyles, ComponentFactory, EventRegistry } from "justright_core_v1";
 import { InjectionPoint, Provider } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
@@ -44,7 +44,7 @@ export class TestEntry {
         this.component.setChild("testEntryName", this.testClass.name);
 
         this.eventRegistry.attach(this.component.get("runButton"), "onclick", "//event:runClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:runClicked", new ObjectFunction(this, this.runClicked), this.component.componentIndex);
+        this.eventRegistry.listen("//event:runClicked", new Method(this, this.runClicked), this.component.componentIndex);
 
         /** @type {List<TestEntryFunction>} */
         const testFunctions = this.testClass.testFunctions();

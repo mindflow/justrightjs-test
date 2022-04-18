@@ -1,4 +1,4 @@
-import { Map, ObjectFunction } from "coreutil_v1";
+import { Map, Method } from "coreutil_v1";
 import { CanvasStyles, ComponentFactory, EventRegistry } from "justright_core_v1";
 import { InjectionPoint } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
@@ -34,13 +34,13 @@ export class TestBenchView {
         CanvasStyles.enableStyle(TestBenchView.COMPONENT_NAME);
 
         this.eventRegistry.attach(this.component.get("clearButton"), "onclick", "//event:clearClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:clearClicked", new ObjectFunction(this, this.clearClicked), this.component.componentIndex);
+        this.eventRegistry.listen("//event:clearClicked", new Method(this, this.clearClicked), this.component.componentIndex);
 
         this.eventRegistry.attach(this.component.get("runAllButton"), "onclick", "//event:runAllClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:runAllClicked", new ObjectFunction(this, this.runAllClicked), this.component.componentIndex);
+        this.eventRegistry.listen("//event:runAllClicked", new Method(this, this.runAllClicked), this.component.componentIndex);
 
         this.eventRegistry.attach(this.component.get("resetButton"), "onclick", "//event:resetClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:resetClicked", new ObjectFunction(this, this.resetClicked), this.component.componentIndex);
+        this.eventRegistry.listen("//event:resetClicked", new Method(this, this.resetClicked), this.component.componentIndex);
     }
 
     /**

@@ -1,4 +1,4 @@
-import { Logger, ObjectFunction } from "coreutil_v1";
+import { Logger, Method } from "coreutil_v1";
 import { ComponentFactory } from "justright_core_v1";
 import { InjectionPoint, Provider } from "mindi_v1";
 import { TestBench, TestClassResult } from "testbench_v1";
@@ -37,8 +37,8 @@ export class TestBenchUi {
     postConfig() {
         /** @type {TestBench} */
         this.testBench = new TestBench(
-            new ObjectFunction(this, this.log),
-            new ObjectFunction(this, this.result),
+            new Method(this, this.log),
+            new Method(this, this.result),
             new DiObjectProvider());
 
         this.testTrigger.testBench = this.testBench;
