@@ -7,20 +7,16 @@ export class DiObjectProvider extends ObjectProvider {
         super();
     }
 
-    provide(theClass, args = []) {
-        return new Promise((resolve, reject) => {
-            const object = new theClass(...args);
-            const config = new MindiConfig();
-            config.addAllInstanceProcessor([InstancePostConfigTrigger]);
-            if (object.typeConfigList) {
-                config.addAllTypeConfig(object.typeConfigList);
-            }
-            config.finalize().then(() => {
-                MindiInjector.getInstance().injectTarget(object, config).then(() => {
-                    resolve(object);
-                });
-            });
-        });
+    async provide(theClass, args = []) {
+        const object = new theClass(...args);
+        const config = new MindiConfig();
+        config.addAllInstanceProcessor([InstancePostConfigTrigger]);
+        if (object.typeConfigList) {
+            config.addAllTypeConfig(object.typeConfigList);
+        }
+        await config.finalize();
+        await MindiInjector.getInstance().injectTarget(object, config);
+        return object;
     }
 
 }

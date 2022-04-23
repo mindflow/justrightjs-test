@@ -64,12 +64,12 @@ export class TestBenchUi {
         this.testBenchView.result(testClassResult);
     }
 
-    log(line, level) {
+    async log(line, level) {
         const color = this.asColor(level);
         const context = this;
-        this.lineEntryProvider.get([line, color]).then((lineEntry) => {
-            context.testBenchView.addLine(lineEntry);
-        });
+        const lineEntry = await this.lineEntryProvider.get([line, color]);
+        context.testBenchView.addLine(lineEntry);
+        return lineEntry;
     }
     
     asColor(level) {
