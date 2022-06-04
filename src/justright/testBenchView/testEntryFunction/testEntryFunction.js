@@ -1,5 +1,5 @@
 import { Method } from "coreutil_v1";
-import { CanvasStyles, ComponentFactory, EventRegistry } from "justright_core_v1";
+import { CanvasStyles, ComponentFactory, BaseElementEventRegistry } from "justright_core_v1";
 import { InjectionPoint } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
 
@@ -20,8 +20,8 @@ export class TestEntryFunction {
 		/** @type {ComponentFactory} */
         this.componentFactory = InjectionPoint.instance(ComponentFactory);
 
-		/** @type {EventRegistry} */
-		this.eventRegistry = InjectionPoint.instance(EventRegistry);
+		/** @type {BaseElementEventRegistry} */
+		this.baseElementEventRegistry = InjectionPoint.instance(BaseElementEventRegistry);
 
         /** @type {Object} */
         this.testClass = testClass;
@@ -38,8 +38,8 @@ export class TestEntryFunction {
         CanvasStyles.enableStyle(TestEntryFunction.COMPONENT_NAME);
         this.component.setChild("testEntryFunctionName", this.testFunction.name);
 
-        this.eventRegistry.attach(this.component.get("runButton"), "onclick", "//event:runClicked", this.component.componentIndex);
-        this.eventRegistry.listen("//event:runClicked", new Method(this, this.runClicked), this.component.componentIndex);
+        this.baseElementEventRegistry.attach(this.component.get("runButton"), "onclick", "//event:runClicked", this.component.componentIndex);
+        this.baseElementEventRegistry.listen("//event:runClicked", new Method(this, this.runClicked), this.component.componentIndex);
     }
 
     runClicked() {
