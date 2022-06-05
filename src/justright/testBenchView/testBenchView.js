@@ -1,5 +1,5 @@
 import { Map, Method } from "coreutil_v1";
-import { CanvasStyles, ComponentFactory, BaseElementEventRegistry } from "justright_core_v1";
+import { CanvasStyles, ComponentFactory } from "justright_core_v1";
 import { InjectionPoint } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
 import { LineEntry } from "./lineEntry/lineEntry.js";
@@ -18,9 +18,6 @@ export class TestBenchView {
 
 		/** @type {ComponentFactory} */
         this.componentFactory = InjectionPoint.instance(ComponentFactory);
-
-		/** @type {BaseElementEventRegistry} */
-        this.baseElementEventRegistry = InjectionPoint.instance(BaseElementEventRegistry);
         
         /** @type {TestTrigger} */
         this.testTrigger = testTrigger;
@@ -33,14 +30,9 @@ export class TestBenchView {
 		this.component = this.componentFactory.create(TestBenchView.COMPONENT_NAME);
         CanvasStyles.enableStyle(TestBenchView.COMPONENT_NAME);
 
-        this.baseElementEventRegistry.attach(this.component.get("clearButton"), "onclick", "//event:clearClicked", this.component.componentIndex);
-        this.baseElementEventRegistry.listen("//event:clearClicked", new Method(this, this.clearClicked), this.component.componentIndex);
-
-        this.baseElementEventRegistry.attach(this.component.get("runAllButton"), "onclick", "//event:runAllClicked", this.component.componentIndex);
-        this.baseElementEventRegistry.listen("//event:runAllClicked", new Method(this, this.runAllClicked), this.component.componentIndex);
-
-        this.baseElementEventRegistry.attach(this.component.get("resetButton"), "onclick", "//event:resetClicked", this.component.componentIndex);
-        this.baseElementEventRegistry.listen("//event:resetClicked", new Method(this, this.resetClicked), this.component.componentIndex);
+		this.component.get("clearButton").listenTo("click", new Method(this,this.clearClicked));
+		this.component.get("runAllButton").listenTo("click", new Method(this,this.runAllClicked));
+        this.component.get("resetButton").listenTo("click", new Method(this,this.resetClicked));
     }
 
     /**
