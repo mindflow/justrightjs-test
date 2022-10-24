@@ -1,5 +1,5 @@
 import { Method } from "coreutil_v1";
-import { CanvasStyles, ComponentFactory } from "justright_core_v1";
+import { CanvasStyles, ComponentFactory, Style } from "justright_core_v1";
 import { InjectionPoint } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
 
@@ -55,18 +55,24 @@ export class TestEntryFunction {
     }
 
     fail() {
-        this.component.get("testEntryFunctionName").setAttributeValue("style", "font-weight:bold;color:red");
+        Style.from(this.component.get("testEntryFunctionName"))
+            .set("font-weight", "bold")
+            .set("color", "red");
     }
 
     succeed() {
-        this.component.get("testEntryFunctionName").setAttributeValue("style", "font-weight:bold;color:green");
+        Style.from(this.component.get("testEntryFunctionName"))
+            .set("font-weight", "bold")
+            .set("color", "green");
     }
 
     running() {
-        this.component.get("testEntryFunctionName").setAttributeValue("style", "font-weight:bold;color:black");
+        Style.from(this.component.get("testEntryFunctionName"))
+            .set("font-weight", "bold")
+            .set("color", "black");
     }
 
     reset() {
-        this.component.get("testEntryFunctionName").removeAttribute("style");
+        Style.from(this.component.get("testEntryFunctionName")).cleaz();
     }
 }
