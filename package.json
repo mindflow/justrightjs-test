@@ -14,7 +14,9 @@
     "coreutil_v1": "file:../coreutiljs",
     "justright_core_v1": "file:../justrightjs-core",
     "mindi_v1": "file:../mindijs",
-    "testbench_v1": "file:../testbenchjs"
+    "testbench_v1": "file:../testbenchjs",
+    "containerbridge_v1": "file:../containerbridgejs/webbrowserbridge",
+    "xmlparser_v1": "file:../xmlparserjs"
   },
   "devDependencies": {
     "@rollup/plugin-multi-entry": "^4.0.0",

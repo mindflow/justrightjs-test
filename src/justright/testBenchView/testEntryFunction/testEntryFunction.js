@@ -73,6 +73,6 @@ export class TestEntryFunction {
     }
 
     reset() {
-        Style.from(this.component.get("testEntryFunctionName")).cleaz();
+        Style.from(this.component.get("testEntryFunctionName")).clear();
     }
 }
