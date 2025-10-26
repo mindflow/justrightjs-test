@@ -3,7 +3,6 @@ import { InjectionPoint } from "mindi_v1";
 
 export class LineEntry {
 
-    static get COMPONENT_NAME() { return "LineEntry"; }
 	static get TEMPLATE_URL() { return "/assets/justrightjs-test/lineEntry.html"; }
     static get STYLES_URL() { return "/assets/justrightjs-test/lineEntry.css"; }
     
@@ -15,7 +14,7 @@ export class LineEntry {
 	constructor(line, color = null) {
 
 		/** @type {TemplateComponentFactory} */
-        this.templateComponentFactory = InjectionPoint.instance(TemplateComponentFactory);
+        this.componentFactory = InjectionPoint.instance(TemplateComponentFactory);
 
         /** @type {String} */
         this.line = line;
@@ -24,8 +23,8 @@ export class LineEntry {
     }
 
 	postConfig() {
-		this.component = this.templateComponentFactory.create(LineEntry.COMPONENT_NAME);
-        CanvasStyles.enableStyle(LineEntry.COMPONENT_NAME);
+		this.component = this.componentFactory.create(LineEntry);
+        CanvasStyles.enableStyle(LineEntry.name);
         this.component.setChild("lineEntry", this.line);
         if (this.color) {
             Style.from(this.component.get("lineEntry"))

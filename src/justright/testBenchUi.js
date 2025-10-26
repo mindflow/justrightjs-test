@@ -16,7 +16,7 @@ export class TestBenchUi {
         this.testTrigger = new TestBenchTestTrigger();
 
 		/** @type {TemplateComponentFactory} */
-        this.templateComponentFactory = InjectionPoint.instance(TemplateComponentFactory);
+        this.componentFactory = InjectionPoint.instance(TemplateComponentFactory);
 
         /** @type {TestBenchView} */
         this.testBenchView = InjectionPoint.instance(TestBenchView, [this.testTrigger]);

@@ -6,7 +6,6 @@ import { TestEntryFunction } from "../testEntryFunction/testEntryFunction";
 
 export class TestEntry {
 
-    static get COMPONENT_NAME() { return "TestEntry"; }
 	static get TEMPLATE_URL() { return "/assets/justrightjs-test/testEntry.html"; }
     static get STYLES_URL() { return "/assets/justrightjs-test/testEntry.css"; }
     
@@ -18,7 +17,7 @@ export class TestEntry {
 	constructor(testClass, testTrigger) {
 
 		/** @type {TemplateComponentFactory} */
-        this.templateComponentFactory = InjectionPoint.instance(TemplateComponentFactory);
+        this.componentFactory = InjectionPoint.instance(TemplateComponentFactory);
         
         /** @type {Provider<TestEntryFunction>} */
         this.testEntryFunctionProvider = InjectionPoint.provider(TestEntryFunction)
@@ -36,8 +35,8 @@ export class TestEntry {
     }
 
 	postConfig() {
-		this.component = this.templateComponentFactory.create(TestEntry.COMPONENT_NAME);
-        CanvasStyles.enableStyle(TestEntry.COMPONENT_NAME);
+		this.component = this.componentFactory.create(TestEntry);
+        CanvasStyles.enableStyle(TestEntry.name);
         this.component.setChild("testEntryName", this.testClass.name);
 
         this.component.get("runButton").listenTo("click", new Method(this,this.runClicked));

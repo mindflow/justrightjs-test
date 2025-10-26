@@ -7,7 +7,6 @@ import { TestEntry } from "./testEntry/testEntry.js"
 
 export class TestBenchView {
 
-    static get COMPONENT_NAME() { return "TestBenchView"; }
 	static get TEMPLATE_URL() { return "/assets/justrightjs-test/testBenchView.html"; }
     static get STYLES_URL() { return "/assets/justrightjs-test/testBenchView.css"; }
     
@@ -17,7 +16,7 @@ export class TestBenchView {
 	constructor(testTrigger) {
 
 		/** @type {TemplateComponentFactory} */
-        this.templateComponentFactory = InjectionPoint.instance(TemplateComponentFactory);
+        this.componentFactory = InjectionPoint.instance(TemplateComponentFactory);
         
         /** @type {TestTrigger} */
         this.testTrigger = testTrigger;
@@ -27,8 +26,8 @@ export class TestBenchView {
     }
 
 	postConfig() {
-		this.component = this.templateComponentFactory.create(TestBenchView.COMPONENT_NAME);
-        CanvasStyles.enableStyle(TestBenchView.COMPONENT_NAME);
+		this.component = this.componentFactory.create(TestBenchView);
+        CanvasStyles.enableStyle(TestBenchView.name);
 
 		this.component.get("clearButton").listenTo("click", new Method(this,this.clearClicked));
 		this.component.get("runAllButton").listenTo("click", new Method(this,this.runAllClicked));
