@@ -1,5 +1,5 @@
 import { Map, Method } from "coreutil_v1";
-import { CanvasStyles, ComponentFactory } from "justright_core_v1";
+import { CanvasStyles, TemplateComponentFactory } from "justright_core_v1";
 import { InjectionPoint } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
 import { LineEntry } from "./lineEntry/lineEntry.js";
@@ -16,8 +16,8 @@ export class TestBenchView {
      */
 	constructor(testTrigger) {
 
-		/** @type {ComponentFactory} */
-        this.componentFactory = InjectionPoint.instance(ComponentFactory);
+		/** @type {TemplateComponentFactory} */
+        this.templateComponentFactory = InjectionPoint.instance(TemplateComponentFactory);
         
         /** @type {TestTrigger} */
         this.testTrigger = testTrigger;
@@ -27,7 +27,7 @@ export class TestBenchView {
     }
 
 	postConfig() {
-		this.component = this.componentFactory.create(TestBenchView.COMPONENT_NAME);
+		this.component = this.templateComponentFactory.create(TestBenchView.COMPONENT_NAME);
         CanvasStyles.enableStyle(TestBenchView.COMPONENT_NAME);
 
 		this.component.get("clearButton").listenTo("click", new Method(this,this.clearClicked));

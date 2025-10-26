@@ -1,5 +1,5 @@
 import { Method } from "coreutil_v1";
-import { CanvasStyles, ComponentFactory, Style } from "justright_core_v1";
+import { CanvasStyles, TemplateComponentFactory, Style } from "justright_core_v1";
 import { InjectionPoint } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
 
@@ -17,8 +17,8 @@ export class TestEntryFunction {
      */
 	constructor(testClass, testFunction, testTrigger) {
 
-		/** @type {ComponentFactory} */
-        this.componentFactory = InjectionPoint.instance(ComponentFactory);
+		/** @type {TemplateComponentFactory} */
+        this.templateComponentFactory = InjectionPoint.instance(TemplateComponentFactory);
 
         /** @type {Object} */
         this.testClass = testClass;
@@ -31,7 +31,7 @@ export class TestEntryFunction {
     }
 
 	postConfig() {
-		this.component = this.componentFactory.create(TestEntryFunction.COMPONENT_NAME);
+		this.component = this.templateComponentFactory.create(TestEntryFunction.COMPONENT_NAME);
         CanvasStyles.enableStyle(TestEntryFunction.COMPONENT_NAME);
         this.component.setChild("testEntryFunctionName", this.testFunction.name);
 

@@ -1,4 +1,4 @@
-import { CanvasStyles, ComponentFactory, Style } from "justright_core_v1";
+import { CanvasStyles, TemplateComponentFactory, Style } from "justright_core_v1";
 import { InjectionPoint } from "mindi_v1";
 
 export class LineEntry {
@@ -14,8 +14,8 @@ export class LineEntry {
      */
 	constructor(line, color = null) {
 
-		/** @type {ComponentFactory} */
-        this.componentFactory = InjectionPoint.instance(ComponentFactory);
+		/** @type {TemplateComponentFactory} */
+        this.templateComponentFactory = InjectionPoint.instance(TemplateComponentFactory);
 
         /** @type {String} */
         this.line = line;
@@ -24,7 +24,7 @@ export class LineEntry {
     }
 
 	postConfig() {
-		this.component = this.componentFactory.create(LineEntry.COMPONENT_NAME);
+		this.component = this.templateComponentFactory.create(LineEntry.COMPONENT_NAME);
         CanvasStyles.enableStyle(LineEntry.COMPONENT_NAME);
         this.component.setChild("lineEntry", this.line);
         if (this.color) {
