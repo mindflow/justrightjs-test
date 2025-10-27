@@ -33,7 +33,7 @@ class LineEntry {
         justright_core_v1.CanvasStyles.enableStyle(LineEntry.name);
         this.component.setChild("lineEntry", this.line);
         if (this.color) {
-            justright_core_v1.Style.from(this.component.get("lineEntry"))
+            justright_core_v1.StyleAccessor.from(this.component.get("lineEntry"))
                 .set("color", this.color);
         }
     }
@@ -91,25 +91,25 @@ class TestEntryFunction {
     }
 
     fail() {
-        justright_core_v1.Style.from(this.component.get("testEntryFunctionName"))
+        justright_core_v1.StyleAccessor.from(this.component.get("testEntryFunctionName"))
             .set("font-weight", "bold")
             .set("color", "red");
     }
 
     succeed() {
-        justright_core_v1.Style.from(this.component.get("testEntryFunctionName"))
+        justright_core_v1.StyleAccessor.from(this.component.get("testEntryFunctionName"))
             .set("font-weight", "bold")
             .set("color", "green");
     }
 
     running() {
-        justright_core_v1.Style.from(this.component.get("testEntryFunctionName"))
+        justright_core_v1.StyleAccessor.from(this.component.get("testEntryFunctionName"))
             .set("font-weight", "bold")
             .set("color", "black");
     }
 
     reset() {
-        justright_core_v1.Style.from(this.component.get("testEntryFunctionName")).clear();
+        justright_core_v1.StyleAccessor.from(this.component.get("testEntryFunctionName")).clear();
     }
 }
 
@@ -190,19 +190,19 @@ class TestEntry {
 
     fail() {
         this.failed = true;
-        justright_core_v1.Style.from(this.component.get("testEntryName"))
+        justright_core_v1.StyleAccessor.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "red");
     }
 
     succeed() {
-        justright_core_v1.Style.from(this.component.get("testEntryName"))
+        justright_core_v1.StyleAccessor.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "green");
     }
 
     running() {
-        justright_core_v1.Style.from(this.component.get("testEntryName"))
+        justright_core_v1.StyleAccessor.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "black");
     }
@@ -213,7 +213,7 @@ class TestEntry {
             testEntryFunction.reset();
             return true;
         },this);
-        justright_core_v1.Style.from(this.component.get("testEntryName")).clear();
+        justright_core_v1.StyleAccessor.from(this.component.get("testEntryName")).clear();
     }
 }
 

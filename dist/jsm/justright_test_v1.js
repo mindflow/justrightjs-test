@@ -29,7 +29,7 @@ class LineEntry {
         CanvasStyles.enableStyle(LineEntry.name);
         this.component.setChild("lineEntry", this.line);
         if (this.color) {
-            Style.from(this.component.get("lineEntry"))
+            StyleAccessor.from(this.component.get("lineEntry"))
                 .set("color", this.color);
         }
     }
@@ -87,25 +87,25 @@ class TestEntryFunction {
     }
 
     fail() {
-        Style.from(this.component.get("testEntryFunctionName"))
+        StyleAccessor.from(this.component.get("testEntryFunctionName"))
             .set("font-weight", "bold")
             .set("color", "red");
     }
 
     succeed() {
-        Style.from(this.component.get("testEntryFunctionName"))
+        StyleAccessor.from(this.component.get("testEntryFunctionName"))
             .set("font-weight", "bold")
             .set("color", "green");
     }
 
     running() {
-        Style.from(this.component.get("testEntryFunctionName"))
+        StyleAccessor.from(this.component.get("testEntryFunctionName"))
             .set("font-weight", "bold")
             .set("color", "black");
     }
 
     reset() {
-        Style.from(this.component.get("testEntryFunctionName")).clear();
+        StyleAccessor.from(this.component.get("testEntryFunctionName")).clear();
     }
 }
 
@@ -186,19 +186,19 @@ class TestEntry {
 
     fail() {
         this.failed = true;
-        Style.from(this.component.get("testEntryName"))
+        StyleAccessor.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "red");
     }
 
     succeed() {
-        Style.from(this.component.get("testEntryName"))
+        StyleAccessor.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "green");
     }
 
     running() {
-        Style.from(this.component.get("testEntryName"))
+        StyleAccessor.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "black");
     }
@@ -209,7 +209,7 @@ class TestEntry {
             testEntryFunction.reset();
             return true;
         },this);
-        Style.from(this.component.get("testEntryName")).clear();
+        StyleAccessor.from(this.component.get("testEntryName")).clear();
     }
 }
 

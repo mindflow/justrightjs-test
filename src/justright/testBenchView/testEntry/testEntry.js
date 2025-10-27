@@ -1,5 +1,5 @@
 import { List, Method } from "coreutil_v1";
-import { CanvasStyles, TemplateComponentFactory, Style } from "justright_core_v1";
+import { CanvasStyles, TemplateComponentFactory, StyleAccessor } from "justright_core_v1";
 import { InjectionPoint, Provider } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
 import { TestEntryFunction } from "../testEntryFunction/testEntryFunction";
@@ -81,19 +81,19 @@ export class TestEntry {
 
     fail() {
         this.failed = true;
-        Style.from(this.component.get("testEntryName"))
+        StyleAccessor.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "red");
     }
 
     succeed() {
-        Style.from(this.component.get("testEntryName"))
+        StyleAccessor.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "green");
     }
 
     running() {
-        Style.from(this.component.get("testEntryName"))
+        StyleAccessor.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "black");
     }
@@ -104,6 +104,6 @@ export class TestEntry {
             testEntryFunction.reset();
             return true;
         },this);
-        Style.from(this.component.get("testEntryName")).clear();
+        StyleAccessor.from(this.component.get("testEntryName")).clear();
     }
 }
