@@ -1,4 +1,4 @@
-import { Map, Method } from "coreutil_v1";
+import { Map } from "coreutil_v1";
 import { CanvasStyles, TemplateComponentFactory } from "justright_core_v1";
 import { InjectionPoint } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
@@ -29,13 +29,12 @@ export class TestBenchView {
 		this.component = this.componentFactory.create(TestBenchView);
         CanvasStyles.enableStyle(TestBenchView.name);
 
-		this.component.get("clearButton").listenTo("click", new Method(this,this.clearClicked));
-		this.component.get("runAllButton").listenTo("click", new Method(this,this.runAllClicked));
-        this.component.get("resetButton").listenTo("click", new Method(this,this.resetClicked));
+		this.component.get("clearButton").listenTo("click", this.clearClicked, this);
+		this.component.get("runAllButton").listenTo("click", this.runAllClicked, this);
+        this.component.get("resetButton").listenTo("click", this.resetClicked, this);
     }
 
     /**
-     * 
      * @param {TestEntry} testEntry 
      */
     addTestEntry(testEntry) {

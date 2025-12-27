@@ -37,8 +37,8 @@ export class TestBenchUi {
     postConfig() {
         /** @type {TestBench} */
         this.testBench = new TestBench(
-            new Method(this, this.log),
-            new Method(this, this.result),
+            new Method(this.log, this),
+            new Method(this.result, this),
             new DiObjectProvider());
 
         this.testTrigger.testBench = this.testBench;

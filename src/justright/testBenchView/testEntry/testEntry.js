@@ -1,5 +1,5 @@
-import { List, Method } from "coreutil_v1";
-import { CanvasStyles, TemplateComponentFactory, StyleAccessor } from "justright_core_v1";
+import { List } from "coreutil_v1";
+import { CanvasStyles, TemplateComponentFactory, Style } from "justright_core_v1";
 import { InjectionPoint, Provider } from "mindi_v1";
 import { TestClassState, TestTrigger } from "testbench_v1";
 import { TestEntryFunction } from "../testEntryFunction/testEntryFunction";
@@ -39,7 +39,7 @@ export class TestEntry {
         CanvasStyles.enableStyle(TestEntry.name);
         this.component.setChild("testEntryName", this.testClass.name);
 
-        this.component.get("runButton").listenTo("click", new Method(this,this.runClicked));
+        this.component.get("runButton").listenTo("click", this.runClicked, this);
 
         /** @type {List<TestEntryFunction>} */
         const testFunctions = this.testClass.testFunctions();
@@ -81,19 +81,19 @@ export class TestEntry {
 
     fail() {
         this.failed = true;
-        StyleAccessor.from(this.component.get("testEntryName"))
+        Style.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "red");
     }
 
     succeed() {
-        StyleAccessor.from(this.component.get("testEntryName"))
+        Style.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "green");
     }
 
     running() {
-        StyleAccessor.from(this.component.get("testEntryName"))
+        Style.from(this.component.get("testEntryName"))
             .set("font-weight", "bold")
             .set("color", "black");
     }
@@ -104,6 +104,6 @@ export class TestEntry {
             testEntryFunction.reset();
             return true;
         },this);
-        StyleAccessor.from(this.component.get("testEntryName")).clear();
+        Style.from(this.component.get("testEntryName")).clear();
     }
 }

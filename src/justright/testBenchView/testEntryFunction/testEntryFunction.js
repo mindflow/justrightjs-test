@@ -34,7 +34,7 @@ export class TestEntryFunction {
         CanvasStyles.enableStyle(TestEntryFunction.name);
         this.component.setChild("testEntryFunctionName", this.testFunction.name);
 
-        this.component.get("runButton").listenTo("click", new Method(this,this.runClicked));
+        this.component.get("runButton").listenTo("click", this.runClicked, this);
     }
 
     runClicked() {
